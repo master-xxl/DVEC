@@ -54,6 +54,11 @@ sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
 ```
 sudo setenforce 0
 ```
+## Ввод в домен
+Ввод в домен едалть с помощью скрипта `join_to_domain`
+```
+sudo join-to-domain.sh -d prim.dvec.ru -n nhk-c00040979l -u nhk-admin -p password
+```
 
 ## Подключение общих папок
 Диски подключаются с правами авторизовавшегося пользователя. Работает при входе в графичечкую оболочку или консоль. Точка подключения `mountpoint` должна существовать. Папки прописанные в параметрах `mountpoint="/media/%(USER)/alpine-obmen"` будут созданы. Подключенные ресурсы отображаются на рабочем столе 
@@ -82,7 +87,7 @@ dnf install pam_mount
 <volume fstype="cifs" server="nhk-erits-srv.prim.dvec.ru" path="Ериц" mountpoint="/media/%(USER)/erits" options="user=%(USER),rw,setuids,perm,soft,sec=krb5i,cruid=%(USERUID),iocharset=utf8"/>
 ```
 Добавить в файлы `/etc/pam.d/postlogin` вызова соответствующих модулей
+```
 session optional pam_mount.so disable_interactive
+```
 
-## Ввод в домен
-Ввод в домен едалть с помощью скрипта `join_to_domain`
